@@ -1,0 +1,39 @@
+name: NewReadme
+options:
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    CODE_SIGNING_ALLOWED: NO
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  NewReadme:
+    type: application
+    platform: macOS
+    sources: [App]
+    info:
+      path: App/Info.plist
+      properties:
+        LSUIElement: true
+        CFBundleDisplayName: New README
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: pt.diogomaia.NewReadme
+    dependencies:
+      - target: NewReadmeFinderSync
+  NewReadmeFinderSync:
+    type: app-extension
+    platform: macOS
+    sources: [Extension]
+    info:
+      path: Extension/Info.plist
+      properties:
+        CFBundleDisplayName: New README
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: pt.diogomaia.NewReadme.FinderSync
